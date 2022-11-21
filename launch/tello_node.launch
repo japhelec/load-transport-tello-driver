@@ -14,7 +14,7 @@
 			<param name="tello_ip" value="$(arg tello_ip)" />
 			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
 			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="true" />
+			<param name="stream_h264_video" value="false" />
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
@@ -30,7 +30,7 @@
 			<param name="tello_ip" value="$(arg tello_ip)" />
 			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
 			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="true" />
+			<param name="stream_h264_video" value="false" />
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
@@ -46,7 +46,23 @@
 			<param name="tello_ip" value="$(arg tello_ip)" />
 			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
 			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="true" />
+			<param name="stream_h264_video" value="false" />
+			<param name="camera_calibration" value="$(arg camera_calibration)" />			
+		</node>
+
+		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" />
+
+	</group> 
+
+	<group ns="$(arg tello_ns4)" if="$(arg isNode4)">
+
+		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" args="$(arg if4) 9029">
+			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
+			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
+			<param name="tello_ip" value="$(arg tello_ip)" />
+			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
+			<param name="connect_timeout_sec" value="10.0" />
+			<param name="stream_h264_video" value="false" />
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
