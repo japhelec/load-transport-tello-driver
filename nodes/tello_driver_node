@@ -159,11 +159,16 @@ class TelloNode(tello.Tello):
         self.sub_zoom = rospy.Subscriber('video_mode', Empty, self.cb_video_mode, queue_size=1)
 
         if self.stream_h264_video:
+            print("***************************************************")
+            print("stream_h264_video is true")
+            print("***************************************************")
             self.start_video()
             self.subscribe(self.EVENT_VIDEO_DATA, self.cb_video_data)            
             self.subscribe(self.EVENT_VIDEO_FRAME_H264, self.cb_h264_frame)
         else:
-            
+            print("---------------------------------------------------")
+            print("stream_h264_video is false")
+            print("---------------------------------------------------")
             self.frame_thread = threading.Thread(target=self.framegrabber_loop)
             self.frame_thread.start()
 
