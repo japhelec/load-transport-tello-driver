@@ -90,6 +90,7 @@ class TelloNode(tello.Tello):
         self.frame_thread = None
 
         # Connect to drone
+        self.ns = rospy.get_namespace()
         self.log = RospyLogger(rospy.get_namespace())
 
 #######################################BEGIN#######################################    
@@ -490,7 +491,7 @@ class TelloNode(tello.Tello):
                 container = av.open(vs)
                 break
             except BaseException as err:
-                rospy.logerr('fgrab: pyav stream failed - %s' % str(err))
+                rospy.logerr('%s fgrab: pyav stream failed - %s' % (self.ns, str(err)))
                 time.sleep(1.0)
 
         # Once connected, process frames till drone/stream closes
@@ -509,7 +510,7 @@ class TelloNode(tello.Tello):
                     self.pub_caminfo.publish(self.caminfo)                    
                 break
             except BaseException as err:
-                rospy.logerr('fgrab: pyav decoder failed - %s' % str(err))
+                rospy.logerr('%s fgrab: pyav decoder failed - %s' % (self.ns, str(err)))
 
 
     def cb_takeoff(self, msg):
