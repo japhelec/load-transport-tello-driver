@@ -38,6 +38,8 @@
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
+		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns2)">
+		</node>
 		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
 
 	</group>
@@ -54,6 +56,9 @@
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
+		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns3)">
+		</node>
+
 		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
 
 	</group> 
@@ -68,6 +73,9 @@
 			<param name="connect_timeout_sec" value="10.0" />
 			<param name="stream_h264_video" value="false" />
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
+		</node>
+
+		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns4)">
 		</node>
 
 		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
