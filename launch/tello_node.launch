@@ -4,7 +4,9 @@
 	<arg name="tello_cmd_server_port"	default="8889" />
 	<arg name="local_cmd_client_port"	default="8890" />
 	<arg name="local_vid_server_port"	default="6038" />
-	<arg name="camera_calibration"		default="$(find tello_driver)/cfg/960x720.yaml" />    
+	<arg name="camera_calibration"		default="$(find tello_driver)/cfg/960x720.yaml" />   
+	
+	<!-- <node pkg="rosbag" type="record" name="rosbag_record" args="record -o /tmp/hrp2-diag /diagnostics /rosout"/>  -->
 
 	<group ns="$(arg tello_ns1)" if="$(arg isNode1)">
 
@@ -20,6 +22,9 @@
 		</node>
 
 		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns1)">
+		</node>
+
+		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns1)">
 		</node>
 
 		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
@@ -40,6 +45,8 @@
 
 		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns2)">
 		</node>
+		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns2)">
+		</node>
 		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
 
 	</group>
@@ -58,7 +65,8 @@
 
 		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns3)">
 		</node>
-
+		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns3)">
+		</node>
 		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
 
 	</group> 
@@ -76,6 +84,8 @@
 		</node>
 
 		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns4)">
+		</node>
+		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns4)">
 		</node>
 
 		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
