@@ -21,13 +21,25 @@
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
-		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns1)">
-		</node>
+		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+		record -O $(arg dir_ns)/$(arg bag_name)_$(arg tello_ns1).bag 
+		/$(arg tello_ns1)/cmd_vel 
+		/$(arg tello_ns1)/land 
+		/$(arg tello_ns1)/manual_takeoff 
+		/$(arg tello_ns1)/camera/camera_info 
+		/$(arg tello_ns1)/camera/image_raw 
+		/$(arg tello_ns1)/imu 
+		/$(arg tello_ns1)/odom 
+		/$(arg tello_ns1)/status"/>
+
+		<!-- <node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns1)">
+		</node> -->
 
 		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns1)">
 		</node>
 
-		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
+		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns1)">
+		</node>
 
 	</group>
 
