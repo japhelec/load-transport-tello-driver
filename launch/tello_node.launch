@@ -6,8 +6,6 @@
 	<arg name="local_vid_server_port"	default="6038" />
 	<arg name="camera_calibration"		default="$(find tello_driver)/cfg/960x720.yaml" />   
 	
-	<!-- <node pkg="rosbag" type="record" name="rosbag_record" args="record -o /tmp/hrp2-diag /diagnostics /rosout"/>  -->
-
 	<group ns="$(arg tello_ns1)" if="$(arg isNode1)">
 
 		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" args="$(arg if1) 9026">
@@ -30,78 +28,127 @@
 		/$(arg tello_ns1)/camera/image_raw 
 		/$(arg tello_ns1)/imu 
 		/$(arg tello_ns1)/odom 
-		/$(arg tello_ns1)/status"/>
+		/$(arg tello_ns1)/status 
+		/$(arg tello_ns1)/marker 
+		"/>
 
-		<!-- <node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns1)">
-		</node> -->
-
-		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns1)">
+		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns1)">
+			<param name="marker_id" value="0" />
 		</node>
 
 		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns1)">
 		</node>
 
+		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns1)">
+		</node>
 	</group>
 
 	<group ns="$(arg tello_ns2)" if="$(arg isNode2)">
-
 		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" args="$(arg if2) 9027">
 			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
 			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
 			<param name="tello_ip" value="$(arg tello_ip)" />
 			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
 			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="false" />
+			<param name="stream_h264_video" value="false" /> 
+			<!-- effect stream_h264 true or false affect the image transfer method. both will still transfer image -->
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
+		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+		record -O $(arg dir_ns)/$(arg bag_name)_$(arg tello_ns2).bag 
+		/$(arg tello_ns2)/cmd_vel 
+		/$(arg tello_ns2)/land 
+		/$(arg tello_ns2)/manual_takeoff 
+		/$(arg tello_ns2)/camera/camera_info 
+		/$(arg tello_ns2)/camera/image_raw 
+		/$(arg tello_ns2)/imu 
+		/$(arg tello_ns2)/odom 
+		/$(arg tello_ns2)/status 
+		/$(arg tello_ns2)/marker 
+		"/>
+
 		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns2)">
+			<param name="marker_id" value="1" />
 		</node>
+
+		<!-- <node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns2)">
+		</node> -->
+
 		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns2)">
 		</node>
-		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
-
 	</group>
 
 	<group ns="$(arg tello_ns3)" if="$(arg isNode3)">
-
 		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" args="$(arg if3) 9028">
 			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
 			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
 			<param name="tello_ip" value="$(arg tello_ip)" />
 			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
 			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="false" />
+			<param name="stream_h264_video" value="false" /> 
+			<!-- effect stream_h264 true or false affect the image transfer method. both will still transfer image -->
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
+		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+		record -O $(arg dir_ns)/$(arg bag_name)_$(arg tello_ns3).bag 
+		/$(arg tello_ns3)/cmd_vel 
+		/$(arg tello_ns3)/land 
+		/$(arg tello_ns3)/manual_takeoff 
+		/$(arg tello_ns3)/camera/camera_info 
+		/$(arg tello_ns3)/camera/image_raw 
+		/$(arg tello_ns3)/imu 
+		/$(arg tello_ns3)/odom 
+		/$(arg tello_ns3)/status 
+		/$(arg tello_ns3)/marker 
+		"/>
+
 		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns3)">
+			<param name="marker_id" value="2" />
 		</node>
+
+		<!-- <node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns3)">
+		</node> -->
+
 		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns3)">
 		</node>
-		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
-
 	</group> 
 
 	<group ns="$(arg tello_ns4)" if="$(arg isNode4)">
-
 		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" args="$(arg if4) 9029">
 			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
 			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
 			<param name="tello_ip" value="$(arg tello_ip)" />
 			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
 			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="false" />
+			<param name="stream_h264_video" value="false" /> 
+			<!-- effect stream_h264 true or false affect the image transfer method. both will still transfer image -->
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
+		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+		record -O $(arg dir_ns)/$(arg bag_name)_$(arg tello_ns4).bag 
+		/$(arg tello_ns4)/cmd_vel 
+		/$(arg tello_ns4)/land 
+		/$(arg tello_ns4)/manual_takeoff 
+		/$(arg tello_ns4)/camera/camera_info 
+		/$(arg tello_ns4)/camera/image_raw 
+		/$(arg tello_ns4)/imu 
+		/$(arg tello_ns4)/odom 
+		/$(arg tello_ns4)/status 
+		/$(arg tello_ns4)/marker 
+		"/>
+
 		<node pkg="load_transport" name="marker_detect" type="marker_detect.py" output="screen" args="$(arg tello_ns4)">
+			<param name="marker_id" value="3" />
 		</node>
+
+		<!-- <node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns4)">
+		</node> -->
+
 		<node pkg="load_transport" name="talker" type="talker.py" output="screen" args="$(arg tello_ns4)">
 		</node>
-
-		<!-- <node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=image_raw compressed out:=image_raw" /> -->
-
 	</group> 
 
 </launch>
