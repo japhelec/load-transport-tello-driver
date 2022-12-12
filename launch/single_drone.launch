@@ -8,7 +8,7 @@
 	
 	<group ns="tello">
 
-		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" args="wlp0s20f3 9026">
+		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" if="$(arg is_driver)" args="wlp0s20f3 9026">
 			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
 			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
 			<param name="tello_ip" value="$(arg tello_ip)" />
@@ -19,6 +19,7 @@
 		</node>
 
 		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)" args="tello">
+			<param name="ap_id" value="$(arg ap_id)" />
 		</node>
 
 		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)" args="tello">
@@ -34,7 +35,8 @@
 		/tello/imu 
 		/tello/odom 
 		/tello/status 
-		/tello/marker 
+		/tello/payload 
+		/tello/P_b
 		"/>
 
 		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="tello">
