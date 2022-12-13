@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="tello_ip" default="192.168.10.1" />
+	<arg name="tello_cmd_server_port"	default="8889" />
+	<arg name="local_cmd_client_port"	default="8890" />
+	<arg name="local_vid_server_port"	default="6038" />
+	<arg name="camera_calibration"		default="$(find tello_driver)/cfg/960x720.yaml" />   
+	
+	<group ns="$(arg tello_ns1)">
+
+		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" if="$(arg is_driver)" args="wlp0s20f3 9026">
+			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
+			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
+			<param name="tello_ip" value="$(arg tello_ip)" />
+			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
+			<param name="connect_timeout_sec" value="10.0" />
+			<param name="stream_h264_video" value="false" /> 
+			<param name="camera_calibration" value="$(arg camera_calibration)" />			
+		</node>
+
+		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)" args="$(arg tello_ns1)">
+			<param name="ap_id" value="$(arg tello1_ap_id)" />
+		</node>
+
+		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)" args="$(arg tello_ns1)">
+		</node>
+
+		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+		record -O $(arg dir_ns)/$(arg tello_ns1)_$(arg bag_name).bag 
+		/$(arg tello_ns1)/cmd_vel 
+		/$(arg tello_ns1)/land 
+		/$(arg tello_ns1)/manual_takeoff 
+		/$(arg tello_ns1)/camera/camera_info 
+		/$(arg tello_ns1)/camera/image_raw 
+		/$(arg tello_ns1)/imu 
+		/$(arg tello_ns1)/odom 
+		/$(arg tello_ns1)/status 
+		/$(arg tello_ns1)/payload 
+		/$(arg tello_ns1)/P_b
+		"/>
+
+		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns1)">
+		</node>
+	</group>
+
+
+
+
+	<group ns="$(arg tello_ns2)">
+
+		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" if="$(arg is_driver)" args="wlx1cbfce8dc7fe 9027">
+			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
+			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
+			<param name="tello_ip" value="$(arg tello_ip)" />
+			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
+			<param name="connect_timeout_sec" value="10.0" />
+			<param name="stream_h264_video" value="false" /> 
+			<param name="camera_calibration" value="$(arg camera_calibration)" />			
+		</node>
+
+		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)" args="$(arg tello_ns2)">
+			<param name="ap_id" value="$(arg tello2_ap_id)" />
+		</node>
+
+		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)" args="$(arg tello_ns2)">
+		</node>
+
+		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+		record -O $(arg dir_ns)/$(arg tello_ns2)_$(arg bag_name).bag 
+		/$(arg tello_ns2)/cmd_vel 
+		/$(arg tello_ns2)/land 
+		/$(arg tello_ns2)/manual_takeoff 
+		/$(arg tello_ns2)/camera/camera_info 
+		/$(arg tello_ns2)/camera/image_raw 
+		/$(arg tello_ns2)/imu 
+		/$(arg tello_ns2)/odom 
+		/$(arg tello_ns2)/status 
+		/$(arg tello_ns2)/payload 
+		/$(arg tello_ns2)/P_b
+		"/>
+
+		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns2)">
+		</node>
+	</group>
+
+</launch>
