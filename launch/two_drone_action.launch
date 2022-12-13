@@ -8,16 +8,6 @@
 	
 	<group ns="$(arg tello_ns1)">
 
-		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" if="$(arg is_driver)" args="wlp0s20f3 9026">
-			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
-			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
-			<param name="tello_ip" value="$(arg tello_ip)" />
-			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
-			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="false" /> 
-			<param name="camera_calibration" value="$(arg camera_calibration)" />			
-		</node>
-
 		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)" args="$(arg tello_ns1)">
 			<param name="ap_id" value="$(arg tello1_ap_id)" />
 		</node>
@@ -38,25 +28,9 @@
 		/$(arg tello_ns1)/payload 
 		/$(arg tello_ns1)/P_b
 		"/>
-
-		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns1)">
-		</node>
 	</group>
 
-
-
-
 	<group ns="$(arg tello_ns2)">
-
-		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" if="$(arg is_driver)" args="wlx1cbfce8dc7fe 9027">
-			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
-			<param name="local_vid_server_port" value="$(arg local_vid_server_port)" />
-			<param name="tello_ip" value="$(arg tello_ip)" />
-			<param name="tello_cmd_server_port" value="$(arg tello_cmd_server_port)" />
-			<param name="connect_timeout_sec" value="10.0" />
-			<param name="stream_h264_video" value="false" /> 
-			<param name="camera_calibration" value="$(arg camera_calibration)" />			
-		</node>
 
 		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)" args="$(arg tello_ns2)">
 			<param name="ap_id" value="$(arg tello2_ap_id)" />
@@ -78,9 +52,6 @@
 		/$(arg tello_ns2)/payload 
 		/$(arg tello_ns2)/P_b
 		"/>
-
-		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="$(arg tello_ns2)">
-		</node>
 	</group>
 
 </launch>
