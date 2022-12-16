@@ -16,7 +16,7 @@
 		</node>
 
 		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
-		record -O $(arg dir_ns)/$(arg bag_name).bag 
+		record -o $(arg dir_ns)/$(arg bag_name).bag 
 		/tello/cmd_vel 
 		/tello/land 
 		/tello/manual_takeoff 

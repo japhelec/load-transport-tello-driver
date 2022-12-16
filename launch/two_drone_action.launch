@@ -40,7 +40,7 @@
 		</node>
 
 		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
-		record -O $(arg dir_ns)/$(arg tello_ns2)_$(arg bag_name).bag 
+		record -o $(arg dir_ns)/$(arg tello_ns2)_$(arg bag_name).bag 
 		/$(arg tello_ns2)/cmd_vel 
 		/$(arg tello_ns2)/land 
 		/$(arg tello_ns2)/manual_takeoff 
