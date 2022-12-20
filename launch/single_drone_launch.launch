@@ -6,7 +6,7 @@
 	<arg name="local_vid_server_port"	default="6038" />
 	<arg name="camera_calibration"		default="$(find tello_driver)/cfg/960x720.yaml" />   
 	
-	<group ns="tello">
+	<group ns="$(arg tello_ns)">
 
 		<node pkg="tello_driver" name="tello_driver_node" type="tello_driver_node" output="screen" if="$(arg is_driver)" args="$(arg ifname) 9026">
 			<param name="local_cmd_client_port" value="$(arg local_cmd_client_port)" />
@@ -19,6 +19,7 @@
 		</node>
 
 		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)" args="tello">
+			<param name="tello_ns" value="$(arg tello_ns)" />
 		</node>
 	</group>
 
