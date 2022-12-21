@@ -8,15 +8,17 @@
 	
 	<group ns="$(arg tello_ns1)">
 
-		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)" args="$(arg tello_ns1)">
+		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)">
 			<param name="ap_id" value="$(arg tello1_ap_id)" />
+			<param name="tello_ns" value="$(arg tello_ns1)" />
 		</node>
 
-		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)" args="$(arg tello_ns1)">
+		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)">
+			<param name="tello_ns" value="$(arg tello_ns1)" />
 		</node>
 
 		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
-		record -O $(arg dir_ns)/$(arg tello_ns1)_$(arg bag_name).bag 
+		record -o $(arg dir_ns)/$(arg bag_name)_$(arg tello_ns1).bag 
 		/$(arg tello_ns1)/cmd_vel 
 		/$(arg tello_ns1)/land 
 		/$(arg tello_ns1)/manual_takeoff 
@@ -32,15 +34,17 @@
 
 	<group ns="$(arg tello_ns2)">
 
-		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)" args="$(arg tello_ns2)">
+		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)">
 			<param name="ap_id" value="$(arg tello2_ap_id)" />
+			<param name="tello_ns" value="$(arg tello_ns2)" />
 		</node>
 
-		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)" args="$(arg tello_ns2)">
+		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)">
+			<param name="tello_ns" value="$(arg tello_ns2)" />
 		</node>
 
 		<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
-		record -o $(arg dir_ns)/$(arg tello_ns2)_$(arg bag_name).bag 
+		record -o $(arg dir_ns)/$(arg bag_name)_$(arg tello_ns2).bag 
 		/$(arg tello_ns2)/cmd_vel 
 		/$(arg tello_ns2)/land 
 		/$(arg tello_ns2)/manual_takeoff 
