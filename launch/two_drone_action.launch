@@ -23,7 +23,7 @@
 		/$(arg tello_ns1)/land 
 		/$(arg tello_ns1)/manual_takeoff 
 		/$(arg tello_ns1)/camera/camera_info 
-		/$(arg tello_ns1)/camera/image_raw 
+		/$(arg tello_ns1)/camera/compressed/compressed 
 		/$(arg tello_ns1)/imu 
 		/$(arg tello_ns1)/odom 
 		/$(arg tello_ns1)/status 
@@ -49,7 +49,7 @@
 		/$(arg tello_ns2)/land 
 		/$(arg tello_ns2)/manual_takeoff 
 		/$(arg tello_ns2)/camera/camera_info 
-		/$(arg tello_ns2)/camera/image_raw 
+		/$(arg tello_ns2)/camera/compressed/compressed 
 		/$(arg tello_ns2)/imu 
 		/$(arg tello_ns2)/odom 
 		/$(arg tello_ns2)/status 

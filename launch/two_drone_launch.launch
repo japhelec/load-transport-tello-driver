@@ -20,7 +20,10 @@
 
 		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)">
 			<param name="tello_ns" value="$(arg tello_ns1)" />
+			<param name="img_type" value="$(arg img_type)" />
 		</node>
+		
+		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
 	</group>
 	
 	<group ns="$(arg tello_ns2)">
@@ -37,7 +40,10 @@
 
 		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)">
 			<param name="tello_ns" value="$(arg tello_ns2)" />
+			<param name="img_type" value="$(arg img_type)" />
 		</node>
+
+		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
 	</group>
 
 </launch>
