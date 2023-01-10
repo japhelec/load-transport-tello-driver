@@ -58,4 +58,9 @@
 		"/>
 	</group>
 
+	<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+		record -o $(arg dir_ns)/$(arg bag_name)_esp32_cam.bag 
+		/esp32/compressed/compressed 
+		"/>
+
 </launch>
