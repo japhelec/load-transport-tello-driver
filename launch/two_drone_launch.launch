@@ -18,7 +18,7 @@
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
-		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)">
+		<node pkg="load_transport" name="camera_viz" type="main_camera_viz.py" output="screen" if="$(arg is_camera_viz)">
 			<param name="tello_ns" value="$(arg tello_ns1)" />
 			<param name="img_type" value="$(arg img_type)" />
 		</node>
@@ -38,7 +38,7 @@
 			<param name="camera_calibration" value="$(arg camera_calibration)" />			
 		</node>
 
-		<node pkg="load_transport" name="camera_viz" type="camera_viz.py" output="screen" if="$(arg is_camera_viz)">
+		<node pkg="load_transport" name="camera_viz" type="main_camera_viz.py" output="screen" if="$(arg is_camera_viz)">
 			<param name="tello_ns" value="$(arg tello_ns2)" />
 			<param name="img_type" value="$(arg img_type)" />
 		</node>

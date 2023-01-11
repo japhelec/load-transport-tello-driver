@@ -8,12 +8,12 @@
 	
 	<group ns="$(arg tello_ns)">
 
-		<node pkg="load_transport" name="perception" type="perception.py" output="screen" if="$(arg is_perception)">
+		<node pkg="load_transport" name="perception" type="main_perception.py" output="screen" if="$(arg is_perception)">
 			<param name="ap_id" value="$(arg ap_id)" />
 			<param name="tello_ns" value="$(arg tello_ns)" />
 		</node>
 
-		<node pkg="load_transport" name="action" type="action.py" output="screen" if="$(arg is_action)">
+		<node pkg="load_transport" name="action" type="main_action.py" output="screen" if="$(arg is_action)">
 			<param name="tello_ns" value="$(arg tello_ns)" />
 		</node>
 
