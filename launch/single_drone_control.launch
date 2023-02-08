@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>	
+	<node pkg="load_transport" name="control" type="main_control.py" output="screen">
+	</node>
+
+	<node pkg="rosbag" type="record" name="recorder" output="screen" if="$(arg is_record)" args="
+	record -o $(arg dir_ns)/$(arg bag_name).bag 
+	/state_transition 
+	/tello_601/cmd_vel 
+	/tello_601/land 
+	/tello_601/manual_takeoff 
+	/tello_601/camera/camera_info 
+	/tello_601/camera/compressed/compressed 
+	/tello_601/imu 
+	/tello_601/odom 
+	/tello_601/status 
+	/tello_601/Mc 
+	/tello_601/Ql 
+	/tello_601/cRm
+	"/>
+</launch>

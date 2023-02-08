@@ -23,6 +23,10 @@
 			<param name="img_type" value="$(arg img_type)" />
 		</node>
 
+		<node pkg="load_transport" name="perception" type="main_perception.py" output="screen" if="$(arg is_perception)">
+			<param name="tello_ns" value="$(arg tello_ns)" />
+		</node>
+
 		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
 	</group>
 
