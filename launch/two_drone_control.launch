@@ -19,7 +19,8 @@
 	/$(arg tello1_ns)/odom 
 	/$(arg tello1_ns)/status 
 	/$(arg tello1_ns)/Mc 
-	/$(arg tello1_ns)/Ql 
+	/$(arg tello1_ns)/Ql/raw 
+	/$(arg tello1_ns)/Ql/filtered 
 	/$(arg tello1_ns)/cRm
 	/$(arg tello2_ns)/cmd_vel 
 	/$(arg tello2_ns)/land 
@@ -30,7 +31,8 @@
 	/$(arg tello2_ns)/odom 
 	/$(arg tello2_ns)/status 
 	/$(arg tello2_ns)/Mc 
-	/$(arg tello2_ns)/Ql 
+	/$(arg tello2_ns)/Ql/raw 
+	/$(arg tello2_ns)/Ql/filtered 
 	/$(arg tello2_ns)/cRm
 	"/>
 </launch>
