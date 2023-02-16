@@ -16,8 +16,11 @@
 	/$(arg tello_ns)/imu 
 	/$(arg tello_ns)/odom 
 	/$(arg tello_ns)/status 
-	/$(arg tello_ns)/Mc 
-	/$(arg tello_ns)/Ql 
-	/$(arg tello_ns)/cRm
+	/$(arg tello_ns)/Mc/raw 
+	/$(arg tello_ns)/Mc/filtered 
+	/$(arg tello_ns)/Ql/raw 
+	/$(arg tello_ns)/Ql/filtered  
+	/$(arg tello_ns)/cRm/raw 
+	/$(arg tello_ns)/cRm/filtered
 	"/>
 </launch>
