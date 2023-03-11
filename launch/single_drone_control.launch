@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <launch>	
 	<node pkg="load_transport" name="control" type="main_control_single.py" output="screen">
-		<param name="ap_id" value="$(arg tello_ap_id)" />
 		<param name="tello_ns" value="$(arg tello_ns)" />
 	</node>
 
