@@ -25,6 +25,8 @@
 
 		<node pkg="load_transport" name="perception" type="main_perception.py" output="screen" if="$(arg is_perception)">
 			<param name="tello_ns" value="$(arg tello1_ns)" />
+			<param name="kalman_Q" value="$(arg kalman_Q)" />
+			<param name="kalman_R" value="$(arg kalman_R)" />
 		</node>
 		
 		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
@@ -49,6 +51,8 @@
 
 		<node pkg="load_transport" name="perception" type="main_perception.py" output="screen" if="$(arg is_perception)">
 			<param name="tello_ns" value="$(arg tello2_ns)" />
+			<param name="kalman_Q" value="$(arg kalman_Q)" />
+			<param name="kalman_R" value="$(arg kalman_R)" />
 		</node>
 
 		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
@@ -73,6 +77,8 @@
 
 		<node pkg="load_transport" name="perception" type="main_perception.py" output="screen" if="$(arg is_perception)">
 			<param name="tello_ns" value="$(arg tello3_ns)" />
+			<param name="kalman_Q" value="$(arg kalman_Q)" />
+			<param name="kalman_R" value="$(arg kalman_R)" />
 		</node>
 
 		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
