@@ -27,6 +27,10 @@
 			<param name="tello_ns" value="$(arg tello_ns)" />
 		</node>
 
+		<node pkg="load_transport" name="height" type="main_height.py" output="screen" if="$(arg is_height)">
+			<param name="tello_ns" value="$(arg tello_ns)" />
+		</node>
+
 		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
 	</group>
 
