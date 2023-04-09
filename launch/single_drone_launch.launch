@@ -36,6 +36,10 @@
 			<param name="height_R_az" value="$(arg height_R_az)" />
 		</node>
 
+		<node pkg="load_transport" name="bearing" type="main_bearing.py" output="screen" if="$(arg is_bearing)">
+			<param name="tello_ns" value="$(arg tello_ns)" />
+		</node>
+
 		<node pkg="image_transport" name="image_compressed" type="republish" args="raw in:=camera/image_raw compressed out:=camera/compressed" />
 	</group>
 
