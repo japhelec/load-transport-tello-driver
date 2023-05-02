@@ -23,19 +23,6 @@
 			<param name="img_type" value="$(arg img_type)" />
 		</node>
 
-		<node pkg="load_transport" name="perception" type="main_perception.py" output="screen" if="$(arg is_perception)">
-			<param name="tello_ns" value="$(arg tello_ns)" />
-			<param name="kalman_Q" value="$(arg kalman_Q)" />
-			<param name="kalman_R" value="$(arg kalman_R)" />
-		</node>
-
-		<node pkg="load_transport" name="height" type="main_height.py" output="screen" if="$(arg is_height)">
-			<param name="tello_ns" value="$(arg tello_ns)" />
-			<param name="height_Q_az" value="$(arg height_Q_az)" />
-			<param name="height_R_h" value="$(arg height_R_h)" />
-			<param name="height_R_az" value="$(arg height_R_az)" />
-		</node>
-
 		<node pkg="load_transport" name="bearing" type="main_bearing.py" output="screen" if="$(arg is_bearing)">
 			<param name="tello_ns" value="$(arg tello_ns)" />
 		</node>
